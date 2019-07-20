@@ -1,8 +1,8 @@
-# <README Template>
+# Calorie and Food Counter
 
 Written by Kris Lafrance
 
-Uses HTML5, Javascript, Bootstrap
+Uses HTML5, Javascript, Materialize
 
 # Features
 
@@ -10,5 +10,5 @@ Uses HTML5, Javascript, Bootstrap
 
 # Run
 
-* `git clone https://github.com/Ero6067/<EXAMPLE>.git`
+* `git clone https://github.com/Ero6067/colorie-counter.git`
 * open index.html
