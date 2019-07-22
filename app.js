@@ -36,7 +36,8 @@ const UICtrl = (function()  {
   const UISelectors = {
     // Put the id in a variable so that if we change the id name won't have to
     // change it all over the place, just in this UISelectors var
-    itemList: '#item-list'
+    itemList: '#item-list',
+    addBtn: '.add-btn'
   }
   // Public Methods
   return {
@@ -54,6 +55,9 @@ const UICtrl = (function()  {
 
       // Insert list items
       document.querySelector(UISelectors.itemList).innerHTML = html;
+    },
+    getSelectors: function(){
+      return UISelectors;
     }
   }
 
@@ -61,14 +65,31 @@ const UICtrl = (function()  {
 
 //App Controller
 const App = (function(ItemCtrl, UICtrl)  {
+  // Load event listeners
+  const loadEventListerns = function(){
+    // Get UI Selectors
+    const UISelectors = UICtrl.getSelectors();
 
-  // Publilc methods
+    // Add item event
+    document.querySelector(UISelectors.addBtn).addEventListener('click', itemAddSubmit);
+  }
+
+  // Add item submit
+  const itemAddSubmit = function(e) {
+    console.log('Add ITEM');
+    e.preventDefault();
+  }
+
+  // Public methods
   return {
     init: function(){
       // Fetch items from data structure
       const items = ItemCtrl.getItems();
       // Populate list with items
       UICtrl.populateItemList(items);
+
+      // Load event  listeners
+      loadEventListerns();
     }
   }
   
