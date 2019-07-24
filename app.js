@@ -13,29 +13,30 @@ const data = {
 
 class App {
   constructor() {
-    /*Load event Listeners*/
+    // Load event Listeners
     const loadEventListeners = () => {
       document
         .querySelector(".add-btn")
         .addEventListener("click", itemAddSubmit);
     };
 
-    /*Add Item Submit*/
+    // Add Item Submit
     const itemAddSubmit = function(e) {
-      const uictrl = new UICtrl();
-      const input = uictrl.getItemInput();
+      const uiCtrl = new UICtrl();
+      // Get form input from UI controller
+      const input = uiCtrl.getItemInput();
 
       /*Check for name and calorie input*/
       if (input.name !== "" && input.calories !== "") {
-        const itemctrl = new ItemCtrl();
+        const itemCtrl = new ItemCtrl();
+        // Add item 
+        const newItem = itemCtrl.addItem(input.name, input.calories);
 
-        const newItem = itemctrl.addItem(input.name, input.calories);
+        // Add item to list
+        uiCtrl.addListItem(newItem);
 
-        /*add item to list*/
-        //const uictrl = new UICtrl();
-        uictrl.addListItem(newItem);
-
-        uictrl.clearInput();
+        // Clear fields
+        uiCtrl.clearInput();
       }
 
       e.preventDefault();
@@ -44,18 +45,18 @@ class App {
     /*Public Methods*/
     return {
       init() {
-        /*Fetch Items from data structure*/
-        const uictrl = new UICtrl();
-        const itemctrl = new ItemCtrl();
+        // Fetch Items from data structure
+        const uiCtrl = new UICtrl();
+        const itemCtrl = new ItemCtrl();
 
-        const items = itemctrl.getItems();
+        const items = itemCtrl.getItems();
 
+        // Check if any items
         if (items.length === 0) {
-          uictrl.hideList();
+          uiCtrl.hideList();
         } else {
-          /*Popultae list with items*/
-
-          uictrl.populateItemList(items);
+          // Populate list with items
+          uiCtrl.populateItemList(items);
         }
 
         /*Load Event Listeners*/

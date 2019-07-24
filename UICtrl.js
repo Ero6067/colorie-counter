@@ -1,15 +1,20 @@
 /*UI Controller*/
 
 class UICtrl {
+  constructor() {
+    const UISelectors = {
+      itemList: "#item-list",
+      addBtn: ".add-btn",
+      itemNameInput: "#item-name",
+      itemCaloriesInput: "#item-calories"
+    };
 
-  constructor (){
-  
     //Public Methods
     return {
-      populateItemList: (items) => {
-        let html ='';
-  
-        items.forEach(function(item){
+      populateItemList: items => {
+        let html = "";
+
+        items.forEach(function(item) {
           html += `
             <li class="collection-item" id="${item.id}">
               <strong>${item.name} </strong> <em>${item.calories} Calories</em>
@@ -18,47 +23,53 @@ class UICtrl {
               </a>
             </li>
           `;
-  
-  
         });
-  
+
         /*Insert List Items*/
-          document.getElementById('item-list').innerHTML = html;
+        document.getElementById(UISelectors.itemList).innerHTML = html;
       },
-  
-      clearInput: () => {
-        document.getElementById('item-name').value ='';
-        document.getElementById('item-calories').value='';
+      
+      getItemInput: function(){
+        return {
+          name:document.querySelector(UISelectors.itemNameInput).value,
+          calories:document.querySelector(UISelectors.itemCaloriesInput).value
+        }
       },
-  
-      addListItem:(item) => {
+     
+      addListItem: item => {
         /*Show the list*/
-        document.getElementById('item-list').style.display = 'block';
+        document.querySelector(UISelectors.itemList).style.display = "block";
         /*Create li element*/
-        const li = document.createElement('li');
+        const li = document.createElement("li");
         /*Add Class*/
-        li.className = 'collection-item';
+        li.className = "collection-item";
         /*Add ID*/
         li.id = `item-${item.id}`;
         /*Add HTML*/
-        li.innerHTML = `<strong>${item.name}: </strong> <em>${item.calories} Calories</em>
-          <a href="#" class="secondary-content">
-            <i class="edit-item fa fa-pencil"></i>
-          </a>`;
+        li.innerHTML = `<strong>${item.name}: </strong> <em>${
+          item.calories
+        } Calories</em>
+        <a href="#" class="secondary-content">
+        <i class="edit-item fa fa-pencil"></i>
+        </a>`;
         /*Insert Item*/
-        document.getElementById('item-list').insertAdjacentElement('beforeend', li)
+        document
+        .querySelector(UISelectors.itemList)
+        .insertAdjacentElement("beforeend", li);
       },
-  
+
+      clearInput: () => {
+        document.querySelector(UISelectors.itemNameInput).value = "";
+        document.querySelector(UISelectors.itemCaloriesInput).value = "";
+      },
+      
       hideList: () => {
-        document.getElementById('item-list').style.display = 'none';
+        document.querySelector(UISelectors.itemList).style.display = 'none';
       },
-  
-      getItemInput: () => {
-        return {
-          name: document.getElementById('item-name').value,
-          calories: document.getElementById('item-calories').value
-        }
+      
+      getSelectors: () => {
+        return UISelectors;
       }
-    }
+    };
   }
-  }
+}
