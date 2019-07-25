@@ -13,22 +13,28 @@ const data = {
 
 class App {
   constructor() {
+    const uiCtrl = new UICtrl();
+    const itemCtrl = new ItemCtrl();
+    const UISelectors = uiCtrl.getSelectors();
     // Load event Listeners
-    const loadEventListeners = () => {
+    const loadEventListeners = function() {
+      // Add item event
       document
-        .querySelector(".add-btn")
+        .querySelector(UISelectors.addBtn)
         .addEventListener("click", itemAddSubmit);
+      // Edit icon click event
+      document
+        .querySelector(UISelectors.itemList)
+        .addEventListener("click", itemUpdateSubmit);
     };
 
     // Add Item Submit
     const itemAddSubmit = function(e) {
-      const uiCtrl = new UICtrl();
       // Get form input from UI controller
       const input = uiCtrl.getItemInput();
 
-      /*Check for name and calorie input*/
+      // Check for name and calorie input
       if (input.name !== "" && input.calories !== "") {
-        const itemCtrl = new ItemCtrl();
         // Add item
         const newItem = itemCtrl.addItem(input.name, input.calories);
 
@@ -44,6 +50,31 @@ class App {
         uiCtrl.clearInput();
       }
 
+      e.preventDefault();
+    };
+
+    // Update item submit
+    const itemUpdateSubmit = function(e) {
+      if(e.target.classList.contains('edit-item')) {
+        // Get list item id (item-0, item-1, etc)
+        const listId = e.target.parentNode.parentNode.id;
+        
+        // Break into an array
+        // Split(seperator) - splits up elements into an array using a seperator
+        const listIdArr = listId.split('-');
+
+        // Get the actual id
+        const id = parseInt(listIdArr[1]);
+
+        // Get item
+        const itemToEdit = itemCtrl.getItemById(id);
+        
+        // Set current item
+        itemCtrl.setCurrentItem(itemToEdit);
+
+        // Add item to dorm
+        uiCtrl.addItemToForm();
+      }
       e.preventDefault();
     };
 
@@ -64,7 +95,6 @@ class App {
         } else {
           // Populate list with items
           uiCtrl.populateItemList(items);
-          
         }
         // Get total calories
         const totalCalories = itemCtrl.getTotalCalories();

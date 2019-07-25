@@ -13,7 +13,7 @@ class ItemCtrl {
         return data.items;
       },
 
-      /*Add items*/
+      //Add items
       addItem(name, calories) {
         let ID;
         /*Create ID*/
@@ -29,13 +29,30 @@ class ItemCtrl {
         /*Create new item*/
         const newItem = new Item(ID, name, calories);
 
-        //console.log(newItem);
-
         /*Add Items to Array*/
         data.items.push(newItem);
 
         //console.log(data.items);
         return newItem;
+      },
+
+      getItemById(id) {
+        let found= null;
+        // Loop through items
+        data.items.forEach(function(item) {
+          if(item.id === id) {
+            found = item;
+          }
+        });
+        return found;
+      },
+
+      setCurrentItem: function(item) {
+        data.currentItem = item;
+      },
+
+      getCurrentItem: function() {
+        return data.currentItem;
       },
 
       getTotalCalories() {
@@ -53,7 +70,7 @@ class ItemCtrl {
         return data.totalCalories;
       },
 
-      logData() {
+      logData: function() {
         return data;
       }
     };
