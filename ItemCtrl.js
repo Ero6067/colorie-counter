@@ -38,6 +38,21 @@ class ItemCtrl {
         return newItem;
       },
 
+      getTotalCalories() {
+        let total = 0;
+
+        // Loop through items and add calories
+        data.items.forEach(function(item){
+          total += item.calories;
+        });
+
+        // Set total calories in data structures
+        data.totalCalories = total;
+
+        // Return total
+        return data.totalCalories;
+      },
+
       logData() {
         return data;
       }

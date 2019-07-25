@@ -29,7 +29,7 @@ class App {
       /*Check for name and calorie input*/
       if (input.name !== "" && input.calories !== "") {
         const itemCtrl = new ItemCtrl();
-        // Add item 
+        // Add item
         const newItem = itemCtrl.addItem(input.name, input.calories);
 
         // Add item to list
@@ -51,12 +51,18 @@ class App {
 
         const items = itemCtrl.getItems();
 
-        // Check if any items
+        // Check if any items in item list
         if (items.length === 0) {
           uiCtrl.hideList();
         } else {
           // Populate list with items
           uiCtrl.populateItemList(items);
+          
+          // Get total calories
+          const totalCalories = itemCtrl.getTotalCalories();
+
+          // Add total calories to UI
+          uiCtrl.showTotalCalories(totalCalories);
         }
 
         /*Load Event Listeners*/

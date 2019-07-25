@@ -3,10 +3,12 @@
 class UICtrl {
   constructor() {
     const UISelectors = {
-      itemList: "#item-list",
-      addBtn: ".add-btn",
-      itemNameInput: "#item-name",
-      itemCaloriesInput: "#item-calories"
+      itemList: '#item-list',
+      addBtn: '.add-btn',
+      itemNameInput: '#item-name',
+      itemCaloriesInput: '#item-calories',
+      totalCalories: '.total-calories'
+
     };
 
     //Public Methods
@@ -37,7 +39,7 @@ class UICtrl {
       },
      
       addListItem: item => {
-        /*Show the list*/
+        //Show the list
         document.querySelector(UISelectors.itemList).style.display = "block";
         /*Create li element*/
         const li = document.createElement("li");
@@ -65,6 +67,9 @@ class UICtrl {
       
       hideList: () => {
         document.querySelector(UISelectors.itemList).style.display = 'none';
+      },
+      showTotalCalories: (totalCalories) => {
+        document.querySelector(UISelectors.totalCalories).textContent = totalCalories;
       },
       
       getSelectors: () => {
