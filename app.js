@@ -35,6 +35,11 @@ class App {
         // Add item to list
         uiCtrl.addListItem(newItem);
 
+        // Get total calories
+        const totalCalories = itemCtrl.getTotalCalories();
+
+        // Add total calories to UI
+        uiCtrl.showTotalCalories(totalCalories);
         // Clear fields
         uiCtrl.clearInput();
       }
@@ -48,8 +53,10 @@ class App {
         // Fetch Items from data structure
         const uiCtrl = new UICtrl();
         const itemCtrl = new ItemCtrl();
-
         const items = itemCtrl.getItems();
+
+        // Clear edit state / set initial state
+        uiCtrl.setInitialState();
 
         // Check if any items in item list
         if (items.length === 0) {
@@ -58,12 +65,12 @@ class App {
           // Populate list with items
           uiCtrl.populateItemList(items);
           
-          // Get total calories
-          const totalCalories = itemCtrl.getTotalCalories();
-
-          // Add total calories to UI
-          uiCtrl.showTotalCalories(totalCalories);
         }
+        // Get total calories
+        const totalCalories = itemCtrl.getTotalCalories();
+
+        // Add total calories to UI
+        uiCtrl.showTotalCalories(totalCalories);
 
         /*Load Event Listeners*/
         loadEventListeners();

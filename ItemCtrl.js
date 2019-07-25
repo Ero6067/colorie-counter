@@ -29,12 +29,12 @@ class ItemCtrl {
         /*Create new item*/
         const newItem = new Item(ID, name, calories);
 
-        console.log(newItem);
+        //console.log(newItem);
 
         /*Add Items to Array*/
         data.items.push(newItem);
 
-        console.log(data.items);
+        //console.log(data.items);
         return newItem;
       },
 

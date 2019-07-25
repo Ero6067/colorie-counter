@@ -5,6 +5,9 @@ class UICtrl {
     const UISelectors = {
       itemList: '#item-list',
       addBtn: '.add-btn',
+      updateBtn: '.update-btn',
+      deleteBtn: '.delete-btn',
+      backBtn: '.back-btn',
       itemNameInput: '#item-name',
       itemCaloriesInput: '#item-calories',
       totalCalories: '.total-calories'
@@ -13,7 +16,7 @@ class UICtrl {
 
     //Public Methods
     return {
-      populateItemList: items => {
+      populateItemList(items) {
         let html = "";
 
         items.forEach(function(item) {
@@ -31,14 +34,14 @@ class UICtrl {
         document.getElementById(UISelectors.itemList).innerHTML = html;
       },
       
-      getItemInput: function(){
+      getItemInput(){
         return {
           name:document.querySelector(UISelectors.itemNameInput).value,
           calories:document.querySelector(UISelectors.itemCaloriesInput).value
         }
       },
      
-      addListItem: item => {
+      addListItem (item) {
         //Show the list
         document.querySelector(UISelectors.itemList).style.display = "block";
         /*Create li element*/
@@ -60,16 +63,23 @@ class UICtrl {
         .insertAdjacentElement("beforeend", li);
       },
 
-      clearInput: () => {
+      clearInput() {
         document.querySelector(UISelectors.itemNameInput).value = "";
         document.querySelector(UISelectors.itemCaloriesInput).value = "";
       },
       
-      hideList: () => {
+      hideList() {
         document.querySelector(UISelectors.itemList).style.display = 'none';
       },
-      showTotalCalories: (totalCalories) => {
+      showTotalCalories(totalCalories) {
         document.querySelector(UISelectors.totalCalories).textContent = totalCalories;
+      },
+      setInitialState() {
+        //clearInput();
+        document.querySelector(UISelectors.updateBtn).style.display = 'none';
+        document.querySelector(UISelectors.deleteBtn).style.display = 'none';
+        document.querySelector(UISelectors.backBtn).style.display = 'none';
+        document.querySelector(UISelectors.addBtn).style.display = 'inline';
       },
       
       getSelectors: () => {
