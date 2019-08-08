@@ -7,7 +7,7 @@ class ItemCtrl {
       this.calories = calories;
     };
 
-    //Public Meth0ds
+    //Public Methods
     return {
       getItems(item) {
         return data.items;
@@ -41,6 +41,22 @@ class ItemCtrl {
         // Loop through items
         data.items.forEach(function(item) {
           if(item.id === id) {
+            found = item;
+          }
+        });
+        return found;
+      },
+
+      updateItem: function(name, calories){
+        // Calories to number
+        calories = parseInt(calories);
+
+        let found = null;
+
+        data.items.forEach(function(item){
+          if(item.id === data.currentItem.id) {
+            item.name = name;
+            item.calories = calories;
             found = item;
           }
         });
