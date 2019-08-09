@@ -1,5 +1,4 @@
 /*Storage Controller*/
-
 //  Data structure
 const data = {
   items: [],
@@ -37,6 +36,11 @@ class App {
       document
         .querySelector(UISelectors.updateBtn)
         .addEventListener("click", itemUpdateSubmit);
+
+      //Delete button event
+      document
+        .querySelector(UISelectors.deleteBtn)
+        .addEventListener("click", itemDeleteSubmit);
 
       //Back button event
       document
@@ -105,7 +109,6 @@ class App {
 
       //Update UI
       uiCtrl.updateListItem(updatedItem);
-      //console.log(itemCtrl.logData(input));
 
       // Get total calories
       const totalCalories = itemCtrl.getTotalCalories();
@@ -116,6 +119,14 @@ class App {
       e.preventDefault();
     };
 
+    // Delete button event
+    const itemDeleteSubmit = function(e){
+      console.log("123");
+
+      e.preventDefault();
+    }
+
+
     /*Public Methods*/
     return {
       init() {
@@ -125,7 +136,7 @@ class App {
         const items = itemCtrl.getItems();
 
         // Clear edit state / set initial state
-        uiCtrl.setInitialState();
+        uiCtrl.clearEditState();
 
         // Check if any items in item list
         if (items.length === 0) {

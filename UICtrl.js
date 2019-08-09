@@ -110,18 +110,18 @@ class UICtrl {
       hideList: function() {
         document.querySelector(UISelectors.itemList).style.display = "none";
       },
+
       showTotalCalories(totalCalories) {
-        document.querySelector(
-          UISelectors.totalCalories
-        ).textContent = totalCalories;
+        document.querySelector(UISelectors.totalCalories).textContent = totalCalories;
       },
-      setInitialState: function() {
+
+      clearEditState: function(){
         document.querySelector(UISelectors.itemNameInput).value = "";
         document.querySelector(UISelectors.itemCaloriesInput).value = "";
-        document.querySelector(UISelectors.updateBtn).style.display = "none";
-        document.querySelector(UISelectors.deleteBtn).style.display = "none";
-        document.querySelector(UISelectors.backBtn).style.display = "none";
-        document.querySelector(UISelectors.addBtn).style.display = "inline";
+        document.querySelector(UISelectors.updateBtn).style.display = 'none';
+        document.querySelector(UISelectors.deleteBtn).style.display = 'none';
+        document.querySelector(UISelectors.backBtn).style.display = 'none';
+        document.querySelector(UISelectors.addBtn).style.display = 'inline';
       },
 
       getSelectors: function() {
