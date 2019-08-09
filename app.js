@@ -42,10 +42,15 @@ class App {
         .querySelector(UISelectors.deleteBtn)
         .addEventListener("click", itemDeleteSubmit);
 
-      //Back button event
+      // Back button event
       document
         .querySelector(UISelectors.backBtn)
         .addEventListener("click", uiCtrl.clearEditState);
+
+      // Clear items event
+      document
+        .querySelector(UISelectors.clearBtn)
+        .addEventListener("click", clearAllItemsClick);
     };
 
     // Add item submit
@@ -116,16 +121,50 @@ class App {
       // Add total calories to UI
       uiCtrl.showTotalCalories(totalCalories);
 
+      uiCtrl.clearEditState();
+
       e.preventDefault();
     };
 
     // Delete button event
     const itemDeleteSubmit = function(e){
-      console.log("123");
+      // Get current item
+      const currentItem = itemCtrl.getCurrentItem();
+
+      // Delete from data structure
+      itemCtrl.deleteItem(currentItem.id);
+
+      //  Delete from UI
+      uiCtrl.deleteListItem(currentItem.id);
+
+      // Get total calories
+      const totalCalories = itemCtrl.getTotalCalories();
+
+      // Add total calories to UI
+      uiCtrl.showTotalCalories(totalCalories);
+
+      uiCtrl.clearEditState();
 
       e.preventDefault();
     }
 
+    // Clear items event
+    const clearAllItemsClick = function(e){
+      // Delete all items from data structure
+      itemCtrl.clearAllItems();
+      
+      // Get total calories
+      const totalCalories = itemCtrl.getTotalCalories();
+
+      // Add total calories to UI
+      uiCtrl.showTotalCalories(totalCalories);
+
+      // Remove from UI
+      uiCtrl.removeItems();
+
+      // Hide UL
+      uiCtrl.hideList();
+    }
 
     /*Public Methods*/
     return {

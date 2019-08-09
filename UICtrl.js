@@ -9,10 +9,11 @@ class UICtrl {
       updateBtn: ".update-btn",
       deleteBtn: ".delete-btn",
       backBtn: ".back-btn",
+      clearBtn: ".clear-btn",
       itemNameInput: "#item-name",
       itemCaloriesInput: "#item-calories",
       totalCalories: ".total-calories"
-    }
+    };
 
     function showEditState() {
       document.querySelector(UISelectors.updateBtn).style.display = "inline";
@@ -92,6 +93,12 @@ class UICtrl {
         });
       },
 
+      deleteListItem: function(id) {
+        const itemID = `#item-${id}`;
+        const item = document.querySelector(itemID);
+        item.remove();
+      },
+
       clearInput: function() {
         document.querySelector(UISelectors.itemNameInput).value = "";
         document.querySelector(UISelectors.itemCaloriesInput).value = "";
@@ -107,21 +114,34 @@ class UICtrl {
         showEditState();
       },
 
+      removeItems: function() {
+        let listItems = document.querySelectorAll(UISelectors.listItems);
+
+        // Turn Node list into array
+        listItems = Array.from(listItems);
+
+        listItems.forEach(function(item) {
+          item.remove();
+        });
+      },
+
       hideList: function() {
         document.querySelector(UISelectors.itemList).style.display = "none";
       },
 
       showTotalCalories(totalCalories) {
-        document.querySelector(UISelectors.totalCalories).textContent = totalCalories;
+        document.querySelector(
+          UISelectors.totalCalories
+        ).textContent = totalCalories;
       },
 
-      clearEditState: function(){
+      clearEditState: function() {
         document.querySelector(UISelectors.itemNameInput).value = "";
         document.querySelector(UISelectors.itemCaloriesInput).value = "";
-        document.querySelector(UISelectors.updateBtn).style.display = 'none';
-        document.querySelector(UISelectors.deleteBtn).style.display = 'none';
-        document.querySelector(UISelectors.backBtn).style.display = 'none';
-        document.querySelector(UISelectors.addBtn).style.display = 'inline';
+        document.querySelector(UISelectors.updateBtn).style.display = "none";
+        document.querySelector(UISelectors.deleteBtn).style.display = "none";
+        document.querySelector(UISelectors.backBtn).style.display = "none";
+        document.querySelector(UISelectors.addBtn).style.display = "inline";
       },
 
       getSelectors: function() {

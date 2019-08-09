@@ -47,7 +47,24 @@ class ItemCtrl {
         return found;
       },
 
-      updateItem: function(name, calories){
+      deleteItem(id){
+         // Get ids
+         const ids = data.items.map(function(item) {
+           return item.id;
+         });
+
+         // Get index
+         const index = ids.indexOf(id);
+
+         //Remove item
+         data.items.splice(index,1);
+      },
+
+      clearAllItems(){
+        data.items = [];
+      },
+
+      updateItem(name, calories){
         // Calories to number
         calories = parseInt(calories);
 
@@ -63,11 +80,11 @@ class ItemCtrl {
         return found;
       },
 
-      setCurrentItem: function(item) {
+      setCurrentItem(item) {
         data.currentItem = item;
       },
 
-      getCurrentItem: function() {
+      getCurrentItem() {
         return data.currentItem;
       },
 
